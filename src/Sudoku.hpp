@@ -1,3 +1,6 @@
+#ifndef SUDOKU_HPP
+#define SUDOKU_HPP
+
 #include <vector>
 
 class Sudoku
@@ -10,3 +13,5 @@ private:
   void check_sudoku() const ;
   std::vector<size_t> board_ ;
 };
+
+#endif
