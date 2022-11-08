@@ -3,8 +3,9 @@
 class Sudoku
 {
 public:
-  Sudoku() : board(81) {} ;
+  Sudoku() : board_(81) {} ;
+  Sudoku(const size_t board[81]) : board_(board, board+81) {} ;
   void print() const ;
 private:
-  std::vector<size_t> board ;
+  std::vector<size_t> board_ ;
 };
