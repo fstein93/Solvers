@@ -1,0 +1,7 @@
+*.out
+*.exe
+*.o
+*.o_debug
+analysis.txt*
+build/
+exe/
