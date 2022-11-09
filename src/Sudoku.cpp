@@ -38,3 +38,4 @@ void Sudoku::check_sudoku() const
     if (board_[i] > 9) throw board_[i] ;
   }
 }
+
