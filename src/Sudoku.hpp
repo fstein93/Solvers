@@ -2,6 +2,7 @@
 #define SUDOKU_HPP
 
 #include <vector>
+#include "Sudoku_Line.hpp"
 
 class Sudoku
 {
