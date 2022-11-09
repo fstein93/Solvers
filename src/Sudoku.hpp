@@ -12,9 +12,12 @@ public:
   void print() const ;
 private:
   void check_sudoku() const ;
-  static int constexpr global2row(const int global) {return global/9 ;} ;
-  static int constexpr global2col(const int global) {return global%9 ;} ;
-  static int constexpr global2block(const int global) {return global2row(global)/3*3+global2col(global) ;} ;
+  Sudoku_Line extract_row(const size_t global) const ;
+  Sudoku_Line extract_col(const size_t global) const ;
+  Sudoku_Line extract_block(const size_t global) const ;
+  static size_t constexpr global2row(const size_t global) {return global/9 ;} ;
+  static size_t constexpr global2col(const size_t global) {return global%9 ;} ;
+  static size_t constexpr global2block(const size_t global) {return global2row(global)/3*3+global2col(global) ;} ;
   std::vector<size_t> board_ ;
 };
 
