@@ -4,18 +4,7 @@
 
 using namespace std ;
 
-Sudoku::Sudoku(const size_t board[81]) : board_(board, board+81) 
-{
-  try
-  {
-    check_sudoku() ;
-  }
-  catch (size_t& e)
-  {
-    cerr << "Found a value larger than 9 : " << e << endl ;
-  }
-}
-
+// Print Sudoku row-wise
 void Sudoku::print() const
 {
   for (size_t i = 0 ; i < 81 ; i++)
@@ -32,14 +21,20 @@ void Sudoku::print() const
   }
 }
 
-void Sudoku::check_sudoku() const
+// Check validity of a Sudoku
+// - Check for unvalid numbers
+bool Sudoku::is_valid() const
 {
   for (size_t i = 0 ; i < 81 ; i++)
   {
-    if (board_[i] > 9) throw board_[i] ;
+    if (board_[i] > 9) return false ;
   }
+  return true ;
 }
 
+// Extraction routines
+// First, determine first element of the given set
+// Then, compile elements of the given set starting from the first element
 Sudoku_Line Sudoku::extract_row(const size_t global) const
 {
   const size_t first_element = global - global2col(global) ;
