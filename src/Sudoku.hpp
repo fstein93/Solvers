@@ -1,6 +1,7 @@
 #ifndef SUDOKU_HPP
 #define SUDOKU_HPP
 
+#include <stddef.h>
 #include <vector>
 #include "Sudoku_Line.hpp"
 
@@ -22,7 +23,7 @@ private:
   // Convert global index to row/col/block numbers
   static size_t constexpr global2row(const size_t global) {return global/9 ;} ;
   static size_t constexpr global2col(const size_t global) {return global%9 ;} ;
-  static size_t constexpr global2block(const size_t global) {return global2row(global)/3*3+global2col(global) ;} ;
+  static size_t constexpr global2block(const size_t global) {return global2row(global)/3*3+global2col(global)/3 ;} ;
   // The actual container
   std::vector<size_t> board_ ;
 };

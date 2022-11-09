@@ -1,6 +1,9 @@
+#include <stddef.h>
 #include "Sudoku_Line.hpp"
 
-bool Sudoku_Line::test_Line() const
+using namespace std ;
+
+bool Sudoku_Line::test_line() const
 {
   // Find the number in the line
   bool found[] = {false, false, false, false, false, false, false, false, false} ;
@@ -8,7 +11,7 @@ bool Sudoku_Line::test_Line() const
   {
     const size_t number = line_[idx]-1 ;
     // Skip if the element is not set (set to zero)
-    if (number > 0)
+    if (number > 0 && number < 10)
     {
       // If you have already found it, it is set twice, so the line is invalid
       if (found[number-1]) return false ;

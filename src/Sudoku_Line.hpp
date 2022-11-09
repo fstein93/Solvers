@@ -6,8 +6,8 @@
 struct Sudoku_Line
 {
 public:
-  bool test_Line() const ;
-  size_t line_[9] ;
+  bool test_line() const ;
+  std::size_t line_[9] ;
 };
 
 #endif

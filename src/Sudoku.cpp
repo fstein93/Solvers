@@ -1,3 +1,4 @@
+#include <stddef.h>
 #include <iostream>
 #include "Sudoku.hpp"
 #include "Sudoku_Line.hpp"
@@ -23,11 +24,30 @@ void Sudoku::print() const
 
 // Check validity of a Sudoku
 // - Check for unvalid numbers
+// - Check row/col/block
 bool Sudoku::is_valid() const
 {
   for (size_t i = 0 ; i < 81 ; i++)
   {
-    if (board_[i] > 9) return false ;
+    if (board_[i] > 9) { return false ; }
+  }
+  // Check rows
+  for (size_t i = 0 ; i < 81 ; i+=9)
+  {
+    if (!extract_row(i).test_line()) return false ;
+  }
+  // Check cols
+  for (size_t i = 0 ; i < 9 ; i++)
+  {
+    if (!extract_col(i).test_line()) return false ;
+  }
+  // Check blocks
+  for (size_t row = 0 ; row < 9 ; row+=3)
+  {
+    for (size_t col = 0 ; col < 9 ; col+=3)
+    {
+      if (!extract_block(9*row+col).test_line()) return false ;
+    }
   }
   return true ;
 }
