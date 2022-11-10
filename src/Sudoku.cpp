@@ -59,7 +59,7 @@ size_t Sudoku::field_with_fewest_options() const
   for (size_t i = 0 ; i < 81 ; i++)
   {
     const size_t number = board_[i] ;
-    if (number == 0 || number > 9)
+    if (!Sudoku_Line::valid_number(number))
     {
       const size_t num_options = number_of_options(i) ;
       if (num_options <= min_number_of_options)

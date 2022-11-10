@@ -11,7 +11,7 @@ bool Sudoku_Line::test_line() const
   {
     const size_t number = line_[idx]-1 ;
     // Skip if the element is not set (set to zero)
-    if (number > 0 && number < 10)
+    if (valid_number(number))
     {
       // If you have already found it, it is set twice, so the line is invalid
       if (found[number-1]) return false ;
@@ -27,7 +27,7 @@ void Sudoku_Line::remove_options(bool (&options)[9]) const
   for (size_t i = 0 ; i < 9 ; i++)
   {
     const size_t number = line_[i] ;
-    if (number > 0 && number < 10)
+    if (valid_number(number))
     {
       options[number-1] = true ;
     }
