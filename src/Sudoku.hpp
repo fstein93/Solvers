@@ -11,6 +11,7 @@ public:
   // Constructors
   Sudoku() : board_(81) {} ;
   Sudoku(const size_t board[81]) : board_(board, board+81) {} ;
+Sudoku(const std::vector<size_t> board) : board_(board) {board_.resize(81) ;} ;
   // Print Sudoku on cout
   void print() const ;
   // Check validity of the Sudoku
@@ -21,6 +22,10 @@ public:
   bool is_completely_filled() const ;
   // Check whether the solution is correct
   bool is_correctly_solved() const {return (is_completely_filled() && is_valid()) ;} ;
+  // Get a list of next possible candidates
+  std::vector<Sudoku> get_next_candidates() const ;
+  // Determine the new options of a given field
+  std::vector<size_t> list_of_options(const size_t global) const ;
 private:
   // Extract row/col/block containing a given element
   Sudoku_Line extract_row(const size_t global) const ;

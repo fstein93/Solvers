@@ -81,6 +81,22 @@ size_t Sudoku::field_with_fewest_options() const
   return field ;
 }
 
+// Get a list of next possible candidates
+std::vector<Sudoku> Sudoku::get_next_candidates() const
+{
+  vector<Sudoku> list_of_candidates ;
+  const size_t next_field = field_with_fewest_options() ;
+  const vector<size_t> new_options = list_of_options(next_field) ;
+  Sudoku next_sudoku(board_) ;
+  size_t& element2adopt = next_sudoku.board_[next_field] ;
+  for (const size_t& element : new_options)
+  {
+    element2adopt = element ;
+    list_of_candidates.push_back(next_sudoku) ;
+  }
+  return list_of_candidates ;
+}
+
 // Extraction routines
 // First, determine first element of the given set
 // Then, compile elements of the given set starting from the first element
@@ -119,4 +135,23 @@ size_t Sudoku::number_of_options(const size_t global) const
     if (!options[i]) counter++ ;
   }
   return counter ;
+}
+
+// Determine the new options of a given field
+vector<size_t> Sudoku::list_of_options(const size_t global) const
+{
+  vector<size_t> new_options ;
+  // Field is already set, so there is just this single option
+  if (board_[global] > 0 || board_[global] <= 9) return new_options ;
+  // Extract local row/col/block and exclude already set numbers
+  bool options[9] = {} ;
+  extract_row(global).remove_options(options) ;
+  extract_col(global).remove_options(options) ;
+  extract_block(global).remove_options(options) ;
+  // Add the new options
+  for (size_t i = 0 ; i < 9 ; i++)
+  {
+    if (!options[i]) new_options.push_back(i+1) ;
+  }
+  return new_options ;
 }
