@@ -3,11 +3,19 @@
 
 using namespace std ;
 
+void write_sudoku(Sudoku& sudoku)
+{
+  sudoku.print() ;
+  cout << "Valid: " << sudoku.is_valid()  << endl ;
+  cout << "Completely filled: " << sudoku.is_completely_filled()  << endl ;
+  cout << "Correctly solved: " << sudoku.is_correctly_solved()  << endl ;
+  cout << endl ;
+}
+
 int main()
 {
   Sudoku sudoku1 ;
-  sudoku1.print() ;
-  cout << sudoku1.is_valid() << " " << sudoku1.is_completely_filled() << " " << sudoku1.is_correctly_solved() << endl ;
+  write_sudoku(sudoku1) ;
 
   constexpr size_t input_solved[] = {5, 3, 4, 6, 7, 8, 9, 1, 2,
                   6, 7, 2, 1, 9, 5, 3, 4, 8,
@@ -19,8 +27,7 @@ int main()
                   2, 8, 7, 4, 1, 9, 6, 3, 5,
                   3, 4, 5, 2, 8, 6, 1, 7, 9} ;
   Sudoku sudoku2(input_solved) ;
-  sudoku2.print() ;
-  cout << sudoku2.is_valid() << " " << sudoku2.is_completely_filled() << " " << sudoku2.is_correctly_solved() << endl ;
+  write_sudoku(sudoku2) ;
 
   constexpr size_t input_error[] = {5, 3, 4, 6, 7, 8, 9, 1, 2,
                   6, 7, 2, 1, 9, 5, 3, 4, 8,
@@ -32,8 +39,7 @@ int main()
                   2, 8, 7, 4, 1, 9, 6, 3, 5,
                   3, 4, 5, 2, 8, 6, 1, 7, 10} ;
   Sudoku sudoku3(input_error) ;
-  sudoku3.print() ;
-  cout << sudoku3.is_valid() << " " << sudoku3.is_completely_filled() << " " << sudoku3.is_correctly_solved() << endl ;
+  write_sudoku(sudoku3) ;
 
   return 0 ;
 }
