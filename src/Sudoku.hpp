@@ -19,6 +19,8 @@ public:
   size_t field_with_fewest_options() const ;
   // Check whether all fields are set
   bool is_completely_filled() const ;
+  // Check whether the solution is correct
+  bool is_correctly_solved() const {return (is_completely_filled() && is_valid()) ;} ;
 private:
   // Extract row/col/block containing a given element
   Sudoku_Line extract_row(const size_t global) const ;
