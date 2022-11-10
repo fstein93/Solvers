@@ -52,6 +52,26 @@ bool Sudoku::is_valid() const
   return true ;
 }
 
+size_t Sudoku::field_with_fewest_options() const
+{
+  size_t field = 0 ;
+  size_t min_number_of_options = 9 ;
+  for (size_t i = 0 ; i < 81 ; i++)
+  {
+    const size_t number = board_[i] ;
+    if (number == 0 || number > 9)
+    {
+      const size_t num_options = number_of_options(i) ;
+      if (num_options <= min_number_of_options)
+      {
+        field = i ;
+        min_number_of_options = num_options ;
+      }
+    }
+  }
+  return field ;
+}
+
 // Extraction routines
 // First, determine first element of the given set
 // Then, compile elements of the given set starting from the first element
@@ -71,4 +91,23 @@ Sudoku_Line Sudoku::extract_block(const size_t global) const
 {
   const size_t first_element = global - (global2row(global)%3)*9 - global2col(global)%3 ;
   return Sudoku_Line({board_[first_element], board_[first_element+1], board_[first_element+2], board_[first_element+9], board_[first_element+10], board_[first_element+11], board_[first_element+18], board_[first_element+19], board_[first_element+20]}) ;
+}
+
+// Determine the number of options of a given field
+size_t Sudoku::number_of_options(const size_t global) const
+{
+  // Field is already set, so there is just this single option
+  if (board_[global] > 0 || board_[global] <= 9) return 1 ;
+  // Extract local row/col/block and exclude already set numbers
+  bool options[9] = {} ;
+  extract_row(global).remove_options(options) ;
+  extract_col(global).remove_options(options) ;
+  extract_block(global).remove_options(options) ;
+  // Count the options (number of false in options)
+  size_t counter = 0 ;
+  for (size_t i = 0 ; i < 9 ; i++)
+  {
+    if (!options[i]) counter++ ;
+  }
+  return counter ;
 }

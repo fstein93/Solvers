@@ -21,3 +21,15 @@ bool Sudoku_Line::test_line() const
   }
   return true ;
 }
+
+void Sudoku_Line::remove_options(bool (&options)[9]) const
+{
+  for (size_t i = 0 ; i < 9 ; i++)
+  {
+    const size_t number = line_[i] ;
+    if (number > 0 && number < 10)
+    {
+      options[number-1] = true ;
+    }
+  }
+}

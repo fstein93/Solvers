@@ -7,7 +7,8 @@ struct Sudoku_Line
 {
 public:
   bool test_line() const ;
-  std::size_t line_[9] ;
+  void remove_options(bool (&options)[9]) const ;
+  size_t line_[9] ;
 };
 
 #endif
