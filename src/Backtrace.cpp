@@ -78,3 +78,23 @@ void Backtrace::step()
     }
   }
 }
+
+bool Backtrace::has_a_solution() const
+{
+  return !solutions.empty() ;
+}
+
+bool Backtrace::has_unique_solution() const
+{
+  return solutions.size()==1 ;
+}
+
+size_t Backtrace::number_of_solutions() const
+{
+  return solutions.size() ;
+}
+
+bool Backtrace::is_completely_solved() const
+{
+  return solution_candidates.empty() ;
+}
