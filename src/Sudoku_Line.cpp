@@ -6,9 +6,9 @@ using namespace std ;
 
 void Sudoku_Line::write() const
 {
-  for (size_t i = 0 ; i < 9; i++)
+  for (const size_t& element : line_)
   {
-    cout << line_[i] << " " ;
+    cout << element << " " ;
   }
   cout << endl ;
 }
@@ -17,9 +17,8 @@ bool Sudoku_Line::test() const
 {
   // Find the number in the line
   bool found[] = {false, false, false, false, false, false, false, false, false} ;
-  for (size_t idx = 0 ; idx < 9 ; idx++)
+  for (const size_t& number : line_)
   {
-    const size_t number = line_[idx]-1 ;
     // Skip if the element is not set (set to zero)
     if (is_valid_number(number))
     {
@@ -34,9 +33,8 @@ bool Sudoku_Line::test() const
 
 void Sudoku_Line::remove_options(bool (&options)[9]) const
 {
-  for (size_t i = 0 ; i < 9 ; i++)
+  for (const size_t& number : line_)
   {
-    const size_t number = line_[i] ;
     if (is_valid_number(number))
     {
       options[number-1] = true ;

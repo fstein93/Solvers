@@ -21,9 +21,9 @@ void Sudoku::print() const
 // - Check row/col/block
 bool Sudoku::is_valid() const
 {
-  for (size_t i = 0 ; i < 81 ; i++)
+  for (const size_t& element : board_)
   {
-    if (board_[i] > 9) { return false ; }
+    if (element > 9) { return false ; }
   }
   // Check rows
   for (size_t i = 0 ; i < 81 ; i+=9)
@@ -48,9 +48,9 @@ bool Sudoku::is_valid() const
 
 bool Sudoku::is_completely_filled() const
 {
-  for (size_t i = 0 ; i < 81 ; i++)
+  for (const size_t& element : board_)
   {
-    if (!Sudoku_Line::is_valid_number(board_[i])) return false ;
+    if (!Sudoku_Line::is_valid_number(element)) return false ;
   }
   return true ;
 }
