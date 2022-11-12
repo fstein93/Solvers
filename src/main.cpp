@@ -65,6 +65,7 @@ int main()
   Sudoku sudoku4(input_unsolved) ;
   write_sudoku(sudoku4) ;
   Backtrace backtrace(sudoku4) ;
+  backtrace.print_any_solution() ;
 
   return 0 ;
 }

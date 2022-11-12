@@ -4,7 +4,7 @@
 
 using namespace std ;
 
-void Sudoku_Line::write() const
+void Sudoku_Line::print() const
 {
   for (const size_t& element : line_)
   {
