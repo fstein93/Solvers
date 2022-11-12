@@ -14,6 +14,8 @@ public:
 Sudoku(const std::vector<size_t> board) : board_(board) {board_.resize(81) ;} ;
   // Print Sudoku on cout
   void print() const ;
+  // Print number of options for each field
+  void print_number_of_options() const ;
   // Check validity of the Sudoku
   bool is_valid() const ;
   // Find field with the fewest number of options

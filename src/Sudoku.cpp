@@ -16,6 +16,16 @@ void Sudoku::print() const
   }
 }
 
+void Sudoku::print_number_of_options() const
+{
+  for (size_t i = 0 ; i < 81 ; i++)
+  {
+    vector<size_t> options(list_of_options(i)) ;
+    cout << options.size() ;
+    utils::add_separator(i, 9) ;
+  }
+}
+
 // Check validity of a Sudoku
 // - Check for unvalid numbers
 // - Check row/col/block

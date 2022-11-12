@@ -13,12 +13,7 @@ void write_sudoku(Sudoku& sudoku)
   cout << "Correctly solved: " << sudoku.is_correctly_solved()  << endl ;
 
   cout << "Number of options" << endl ;
-  for (size_t i = 0 ; i < 81 ; i++)
-  {
-    vector<size_t> options(sudoku.list_of_options(i)) ;
-    cout << options.size() ;
-    utils::add_separator(i, 9) ;
-  }
+  sudoku.print_number_of_options() ;
   cout << endl ;
 
   cout << endl ;
