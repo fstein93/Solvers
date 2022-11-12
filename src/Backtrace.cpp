@@ -46,6 +46,22 @@ void Backtrace::find_any_solution()
   }
 }
 
+void Backtrace::find_unique_solution()
+{
+  while (solutions.size() < 2 && !solution_candidates.empty())
+  {
+    step() ;
+  }
+}
+
+void Backtrace::find_all_solutions()
+{
+  while (!solution_candidates.empty())
+  {
+    step() ;
+  }
+}
+
 void Backtrace::step()
 {
   const Sudoku candidate(solution_candidates.back()) ;
