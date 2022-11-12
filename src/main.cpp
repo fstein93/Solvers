@@ -9,6 +9,23 @@ void write_sudoku(Sudoku& sudoku)
   cout << "Valid: " << sudoku.is_valid()  << endl ;
   cout << "Completely filled: " << sudoku.is_completely_filled()  << endl ;
   cout << "Correctly solved: " << sudoku.is_correctly_solved()  << endl ;
+
+  cout << "Number of options" << endl ;
+  for (size_t i = 0 ; i < 81 ; i++)
+  {
+    vector<size_t> options(sudoku.list_of_options(i)) ;
+    cout << options.size() ;
+    if (i%9!=8)
+    {
+      cout << " " ;
+    }
+    else
+    {
+      cout << endl ;
+    }
+  }
+  cout << endl ;
+
   cout << endl ;
 }
 

@@ -34,19 +34,19 @@ bool Sudoku::is_valid() const
   // Check rows
   for (size_t i = 0 ; i < 81 ; i+=9)
   {
-    if (!extract_row(i).test_line()) return false ;
+    if (!extract_row(i).test()) return false ;
   }
   // Check cols
   for (size_t i = 0 ; i < 9 ; i++)
   {
-    if (!extract_col(i).test_line()) return false ;
+    if (!extract_col(i).test()) return false ;
   }
   // Check blocks
   for (size_t row = 0 ; row < 9 ; row+=3)
   {
     for (size_t col = 0 ; col < 9 ; col+=3)
     {
-      if (!extract_block(9*row+col).test_line()) return false ;
+      if (!extract_block(9*row+col).test()) return false ;
     }
   }
   return true ;
@@ -142,7 +142,7 @@ vector<size_t> Sudoku::list_of_options(const size_t global) const
 {
   vector<size_t> new_options ;
   // Field is already set, so there is just this single option
-  if (board_[global] > 0 || board_[global] <= 9) return new_options ;
+  if (board_[global] > 0 && board_[global] <= 9) return new_options ;
   // Extract local row/col/block and exclude already set numbers
   bool options[9] = {} ;
   extract_row(global).remove_options(options) ;
