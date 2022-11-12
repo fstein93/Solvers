@@ -6,7 +6,8 @@
 struct Sudoku_Line
 {
 public:
-  bool test_line() const ;
+  bool test() const ;
+  void write() const ;
   void remove_options(bool (&options)[9]) const ;
   static constexpr bool is_valid_number(const size_t number) { return (number > 0 && number < 10) ; }
   size_t line_[9] ;

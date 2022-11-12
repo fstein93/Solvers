@@ -1,9 +1,19 @@
 #include <stddef.h>
+#include <iostream>
 #include "Sudoku_Line.hpp"
 
 using namespace std ;
 
-bool Sudoku_Line::test_line() const
+void Sudoku_Line::write() const
+{
+  for (size_t i = 0 ; i < 9; i++)
+  {
+    cout << line_[i] << " " ;
+  }
+  cout << endl ;
+}
+
+bool Sudoku_Line::test() const
 {
   // Find the number in the line
   bool found[] = {false, false, false, false, false, false, false, false, false} ;
