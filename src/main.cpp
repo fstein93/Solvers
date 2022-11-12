@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 #include "Sudoku.hpp"
 #include "utils.hpp"
 #include "Backtrace.hpp"
@@ -63,6 +64,17 @@ int main()
   backtrace.print_any_solution() ;
   backtrace.find_any_solution() ;
   backtrace.print_any_solution() ;
+
+  constexpr size_t number_of_runs = 100 ;
+  const double tstart = double(clock()) ;
+  for (size_t i = 0 ; i < number_of_runs ; i++)
+  {
+    Backtrace new_backtrace(sudoku4) ;
+    new_backtrace.find_any_solution() ;
+  }
+  const double duration = (double(clock()) - tstart)/CLOCKS_PER_SEC ;
+  cout << number_of_runs << " took " << duration << " seconds." << endl ;
+  cout << "Each run took on average " << duration/number_of_runs << " seconds." << endl ;
 
   return 0 ;
 }
