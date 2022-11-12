@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Sudoku.hpp"
 #include "Sudoku_Line.hpp"
+#include "utils.hpp"
 
 using namespace std ;
 
@@ -11,14 +12,7 @@ void Sudoku::print() const
   for (size_t i = 0 ; i < 81 ; i++)
   {
     cout << board_[i] ;
-    if (i%9!=8)
-    {
-      cout << " " ;
-    }
-    else
-    {
-      cout << endl ;
-    }
+    utils::add_separator(i, 9) ;
   }
 }
 

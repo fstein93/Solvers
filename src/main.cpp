@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Sudoku.hpp"
+#include "utils.hpp"
 
 using namespace std ;
 
@@ -15,14 +16,7 @@ void write_sudoku(Sudoku& sudoku)
   {
     vector<size_t> options(sudoku.list_of_options(i)) ;
     cout << options.size() ;
-    if (i%9!=8)
-    {
-      cout << " " ;
-    }
-    else
-    {
-      cout << endl ;
-    }
+    utils::add_separator(i, 9) ;
   }
   cout << endl ;
 
