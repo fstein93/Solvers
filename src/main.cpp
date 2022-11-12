@@ -7,7 +7,7 @@ using namespace std ;
 
 void write_sudoku(Sudoku& sudoku)
 {
-  sudoku.print() ;
+  sudoku.print(cout) ;
   cout << "Valid: " << sudoku.is_valid()  << endl ;
   cout << "Completely filled: " << sudoku.is_completely_filled()  << endl ;
   cout << "Correctly solved: " << sudoku.is_correctly_solved()  << endl ;

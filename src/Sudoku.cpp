@@ -7,12 +7,12 @@
 using namespace std ;
 
 // Print Sudoku row-wise
-void Sudoku::print() const
+void Sudoku::print(ostream& stream=cout) const
 {
   for (size_t i = 0 ; i < 81 ; i++)
   {
-    cout << board_[i] ;
-    utils::add_separator(i, 9) ;
+    stream << board_[i] ;
+    utils::add_separator(i, 9, stream) ;
   }
 }
 
@@ -22,7 +22,7 @@ void Sudoku::print_number_of_options() const
   {
     vector<size_t> options(list_of_options(i)) ;
     cout << options.size() ;
-    utils::add_separator(i, 9) ;
+    utils::add_separator(i, 9, cout) ;
   }
 }
 

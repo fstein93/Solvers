@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 #include <vector>
+#include <iostream>
 #include "Sudoku_Line.hpp"
 
 class Sudoku
@@ -11,9 +12,9 @@ public:
   // Constructors
   Sudoku() : board_(81) {} ;
   Sudoku(const size_t board[81]) : board_(board, board+81) {} ;
-Sudoku(const std::vector<size_t> board) : board_(board) {board_.resize(81) ;} ;
-  // Print Sudoku on cout
-  void print() const ;
+  Sudoku(const std::vector<size_t> board) : board_(board) {board_.resize(81) ;} ;
+  // Print Sudoku to a stream
+  void print(std::ostream& stream) const ;
   // Print number of options for each field
   void print_number_of_options() const ;
   // Check validity of the Sudoku

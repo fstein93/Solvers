@@ -19,6 +19,6 @@ void Backtrace::print_any_solution() const
   else
   {
     cout << "There is at least one solution. One of them is" << endl ;
-    solutions[0].print() ;
+    solutions[0].print(cout) ;
   }
 }
