@@ -126,9 +126,9 @@ Sudoku_Line Sudoku::extract_block(const size_t global) const
 size_t Sudoku::number_of_options(const size_t global) const
 {
   // Field is already set, so there is just this single option
-  if (board_[global] > 0 || board_[global] <= 9) return 1 ;
+  if (Sudoku_Line::is_valid_number(board_[global])) return 1 ;
   // Extract local row/col/block and exclude already set numbers
-  bool options[9] = {} ;
+  bool options[9] = {true, true, true, true, true, true, true, true, true} ;
   extract_row(global).remove_options(options) ;
   extract_col(global).remove_options(options) ;
   extract_block(global).remove_options(options) ;
@@ -136,7 +136,7 @@ size_t Sudoku::number_of_options(const size_t global) const
   size_t counter = 0 ;
   for (size_t i = 0 ; i < 9 ; i++)
   {
-    if (!options[i]) counter++ ;
+    if (options[i]) counter++ ;
   }
   return counter ;
 }
@@ -146,29 +146,19 @@ vector<size_t> Sudoku::list_of_options(const size_t global) const
 {
   vector<size_t> new_options ;
   // Field is already set, so there is just this single option
-  if (board_[global] > 0 && board_[global] <= 9) return new_options ;
+  if (Sudoku_Line::is_valid_number(board_[global])) return new_options ;
   // Extract local row/col/block and exclude already set numbers
-  bool options[9] = {} ;
+  bool options[9] = {true, true, true, true, true, true, true, true, true} ;
   extract_row(global).remove_options(options) ;
   extract_col(global).remove_options(options) ;
   extract_block(global).remove_options(options) ;
   // Add the new options
   for (size_t i = 0 ; i < 9 ; i++)
   {
-    if (!options[i]) new_options.push_back(i+1) ;
+    if (options[i])
+    {
+      new_options.push_back(i+1) ;
+    }
   }
   return new_options ;
-}
-
-std::vector<Sudoku> Sudoku::next_step(const size_t global) const
-{
-  Sudoku new_sudoku(board_) ;
-  vector<Sudoku> list_of_new_sudokus ;
-  size_t& field_to_change = new_sudoku.board_[global] ;
-  for (size_t& next_number : list_of_options(global))
-  {
-    field_to_change = next_number ;
-    list_of_new_sudokus.push_back(new_sudoku) ;
-  }
-  return list_of_new_sudokus ;
 }

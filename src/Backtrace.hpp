@@ -7,10 +7,10 @@
 class Backtrace
 {
 public:
-  Backtrace(Sudoku sudoku) : initial_sudoku(sudoku) {} ;
+  Backtrace(const Sudoku& sudoku) ;
   void print_any_solution() const ;
+  void find_any_solution() ;
 private:
-  const Sudoku initial_sudoku;
   std::vector<Sudoku> solution_candidates ;
   std::vector<Sudoku> solutions ;
 };

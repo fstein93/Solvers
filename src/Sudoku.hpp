@@ -29,8 +29,6 @@ public:
   std::vector<Sudoku> get_next_candidates() const ;
   // Determine the new options of a given field
   std::vector<size_t> list_of_options(const size_t global) const ;
-  // Apply the new options to a Sudoku
-  std::vector<Sudoku> next_step(const size_t global) const ;
 private:
   // Extract row/col/block containing a given element
   Sudoku_Line extract_row(const size_t global) const ;

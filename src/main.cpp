@@ -61,6 +61,8 @@ int main()
   write_sudoku(sudoku4) ;
   Backtrace backtrace(sudoku4) ;
   backtrace.print_any_solution() ;
+  backtrace.find_any_solution() ;
+  backtrace.print_any_solution() ;
 
   return 0 ;
 }

@@ -37,7 +37,7 @@ void Sudoku_Line::remove_options(bool (&options)[9]) const
   {
     if (is_valid_number(number))
     {
-      options[number-1] = true ;
+      options[number-1] = false ;
     }
   }
 }
