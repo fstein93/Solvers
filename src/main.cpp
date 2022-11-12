@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Sudoku.hpp"
 #include "utils.hpp"
+#include "Backtrace.hpp"
 
 using namespace std ;
 
@@ -63,6 +64,7 @@ int main()
                   0, 0, 0, 0, 0, 0, 0, 7, 0} ;
   Sudoku sudoku4(input_unsolved) ;
   write_sudoku(sudoku4) ;
+  Backtrace backtrace(sudoku4) ;
 
   return 0 ;
 }
