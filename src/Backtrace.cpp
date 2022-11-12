@@ -42,18 +42,23 @@ void Backtrace::find_any_solution()
 {
   while (solutions.empty() && !solution_candidates.empty())
   {
-    const Sudoku candidate(solution_candidates.back()) ;
-    solution_candidates.pop_back() ;
-    for (const Sudoku& next_candidate : candidate.get_next_candidates())
+    step() ;
+  }
+}
+
+void Backtrace::step()
+{
+  const Sudoku candidate(solution_candidates.back()) ;
+  solution_candidates.pop_back() ;
+  for (const Sudoku& next_candidate : candidate.get_next_candidates())
+  {
+    if (next_candidate.is_correctly_solved())
     {
-      if (next_candidate.is_correctly_solved())
-      {
-        solutions.push_back(next_candidate) ;
-      }
-      else
-      {
-        solution_candidates.push_back(next_candidate) ;
-      }
+      solutions.push_back(next_candidate) ;
+    }
+    else
+    {
+      solution_candidates.push_back(next_candidate) ;
     }
   }
 }

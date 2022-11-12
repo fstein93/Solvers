@@ -11,6 +11,7 @@ public:
   void print_any_solution() const ;
   void find_any_solution() ;
 private:
+  void step() ;
   std::vector<Sudoku> solution_candidates ;
   std::vector<Sudoku> solutions ;
 };
