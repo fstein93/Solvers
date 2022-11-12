@@ -159,3 +159,16 @@ vector<size_t> Sudoku::list_of_options(const size_t global) const
   }
   return new_options ;
 }
+
+std::vector<Sudoku> Sudoku::next_step(const size_t global) const
+{
+  Sudoku new_sudoku(board_) ;
+  vector<Sudoku> list_of_new_sudokus ;
+  size_t& field_to_change = new_sudoku.board_[global] ;
+  for (size_t& next_number : list_of_options(global))
+  {
+    field_to_change = next_number ;
+    list_of_new_sudokus.push_back(new_sudoku) ;
+  }
+  return list_of_new_sudokus ;
+}
