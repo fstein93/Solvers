@@ -6,6 +6,11 @@
 
 using namespace std ;
 
+// TODO
+// - Refactor tests: write proper tests
+// - Add more tests
+// - Add input from file (standard input too tedious)
+
 void write_sudoku(Sudoku& sudoku)
 {
   sudoku.print(cout) ;

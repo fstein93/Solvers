@@ -6,6 +6,12 @@
 
 using namespace std ;
 
+// TODO
+// - Add info about how Sudoku was create (from scratch or by adding number at a given field)
+// - Accelerate Sudoku::field_with_fewest_options
+// - Accelerate Sudoku::number_of_options
+// - Improve Sudoku::print, Sudoku::print_number_of_options to mimic the Sudoku board
+
 // Print Sudoku row-wise
 void Sudoku::print(ostream& stream=cout) const
 {

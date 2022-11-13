@@ -4,6 +4,10 @@
 #include <vector>
 #include "Sudoku.hpp"
 
+// TODO
+// - Refactor criteria of find_*/has_* functions
+// - Extend to other kinds of puzzles
+
 class Backtrace
 {
 public:
