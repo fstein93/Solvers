@@ -169,20 +169,7 @@ Sudoku_Line Sudoku::extract_block(const size_t global) const
 // Determine the number of options of a given field
 size_t Sudoku::number_of_options(const size_t global) const
 {
-  // Field is already set, so there is just this single option
-  if (Sudoku_Line::is_valid_number(board_[global])) return 1 ;
-  // Extract local row/col/block and exclude already set numbers
-  bool options[9] = {true, true, true, true, true, true, true, true, true} ;
-  extract_row(global).remove_options(options) ;
-  extract_col(global).remove_options(options) ;
-  extract_block(global).remove_options(options) ;
-  // Count the options (number of false in options)
-  size_t counter = 0 ;
-  for (size_t i = 0 ; i < 9 ; i++)
-  {
-    if (options[i]) counter++ ;
-  }
-  return counter ;
+  return (options_[global]).size() ;
 }
 
 // Determine the new options of a given field
