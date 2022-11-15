@@ -25,7 +25,21 @@ void Sudoku::setup_options()
     }
     else
     {
-      options_.push_back(list_of_options(i)) ;
+      // Extract local row/col/block and exclude already set numbers
+      bool options[9] = {true, true, true, true, true, true, true, true, true} ;
+      extract_row(i).remove_options(options) ;
+      extract_col(i).remove_options(options) ;
+      extract_block(i).remove_options(options) ;
+      // Add the new options 
+      vector<size_t> new_options ;
+      for (size_t j = 0 ; j < 9 ; j++)
+      {
+        if (options[j])
+        {
+          new_options.push_back(j+1) ;
+        }
+      }
+      options_.push_back(new_options) ;
     }
   }
   options_.resize(81) ;
