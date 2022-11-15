@@ -11,8 +11,8 @@ class Sudoku
 public:
   // Constructors
   Sudoku() : board_(81) {} ;
-  Sudoku(const size_t board[81]) : board_(board, board+81) {} ;
-  Sudoku(const std::vector<size_t> board) : board_(board) {board_.resize(81) ;} ;
+  Sudoku(const size_t board[81]) : board_(board, board+81) {setup_options();} ;
+  Sudoku(const std::vector<size_t> board) : board_(board) {board_.resize(81) ; setup_options() ;} ;
   // Print Sudoku to a stream
   void print(std::ostream& stream) const ;
   // Print number of options for each field
@@ -30,6 +30,7 @@ public:
   // Determine the new options of a given field
   std::vector<size_t> list_of_options(const size_t global) const ;
 private:
+  void setup_options() ;
   // Extract row/col/block containing a given element
   Sudoku_Line extract_row(const size_t global) const ;
   Sudoku_Line extract_col(const size_t global) const ;
@@ -42,6 +43,7 @@ private:
   size_t number_of_options(const size_t global) const ;
   // The actual container
   std::vector<size_t> board_ ;
+  std::vector<std::vector<size_t>> options_ ;
 };
 
 #endif

@@ -15,6 +15,22 @@ using namespace std ;
 
 const string row_block_separator = "+-----+-----+-----+" ;
 
+void Sudoku::setup_options()
+{
+  for (size_t i = 0 ; i < 81 ; i++)
+  {
+    if (Sudoku_Line::is_valid_number(board_[i]))
+    {
+      options_.push_back(vector<size_t>()) ;
+    }
+    else
+    {
+      options_.push_back(list_of_options(i)) ;
+    }
+  }
+  options_.resize(81) ;
+}
+
 // Print Sudoku row-wise
 void Sudoku::print(ostream& stream=cout) const
 {
