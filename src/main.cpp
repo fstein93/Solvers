@@ -81,5 +81,24 @@ int main()
   cout << number_of_runs << " took " << duration << " seconds." << endl ;
   cout << "Each run took on average " << duration/number_of_runs << " seconds." << endl ;
 
+  constexpr size_t input_non_unique_solution[] = {0, 3, 0, 0, 0, 0, 0, 0, 0,
+                  0, 0, 0, 1, 9, 5, 0, 0, 0,
+                  0, 0, 8, 0, 0, 0, 0, 6, 0,
+                  8, 0, 0, 0, 6, 0, 0, 0, 0,
+                  4, 0, 0, 8, 0, 0, 0, 0, 0,
+                  0, 0, 0, 0, 2, 0, 0, 0, 0,
+                  0, 6, 0, 0, 0, 0, 2, 8, 0,
+                  0, 0, 0, 4, 1, 9, 0, 0, 5,
+                  0, 0, 0, 0, 0, 0, 0, 7, 0} ;
+  Sudoku sudoku5(input_non_unique_solution) ;
+  write_sudoku(sudoku5) ;
+  Backtrace backtrace2(sudoku5) ;
+  backtrace2.find_any_solution() ;
+  backtrace2.print_any_solution() ;
+  backtrace2.find_unique_solution() ;
+  backtrace2.has_unique_solution() ;
+  backtrace2.find_all_solutions() ;
+  cout << "Total number of solutions: " << backtrace2.number_of_solutions() << endl ;
+
   return 0 ;
 }
