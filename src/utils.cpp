@@ -15,3 +15,15 @@ void utils::add_separator(const size_t i, const size_t line_length, ostream &out
     outputstream << endl ;
   }
 }
+
+void utils::add_separator_block(const size_t i, const size_t block_size, ostream &outputstream)
+{
+  if ((i+1)%block_size)
+  {
+    outputstream << " " ;
+  }
+  else
+  {
+    outputstream << "|" ;
+  }
+}

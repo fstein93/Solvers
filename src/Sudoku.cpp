@@ -1,5 +1,6 @@
 #include <stddef.h>
 #include <iostream>
+#include <sstream>
 #include "Sudoku.hpp"
 #include "Sudoku_Line.hpp"
 #include "utils.hpp"
@@ -10,25 +11,46 @@ using namespace std ;
 // - Add info about how Sudoku was create (from scratch or by adding number at a given field)
 // - Accelerate Sudoku::field_with_fewest_options
 // - Accelerate Sudoku::number_of_options
-// - Improve Sudoku::print, Sudoku::print_number_of_options to mimic the Sudoku board
+// - Refactor print functions (maybe with Lambda functions)
+
+const string row_block_separator = "+-----+-----+-----+" ;
 
 // Print Sudoku row-wise
 void Sudoku::print(ostream& stream=cout) const
 {
-  for (size_t i = 0 ; i < 81 ; i++)
+  stream << row_block_separator << endl ;
+  for (size_t i = 0 ; i < 9 ; i++)
   {
-    stream << board_[i] ;
-    utils::add_separator(i, 9, stream) ;
+    // Use buffer to print whole lines (important if we print to std::err)
+    // Otherwise, we will print each junk in a separate line
+    stringstream row ;
+    row << "|" ;
+    for (size_t j = i*9 ; j < (i+1)*9 ; j++)
+    {
+      row << board_[j] ;
+      utils::add_separator_block(j, 3, row) ;
+    }
+    stream << row.str() << endl ;
+    if (i%3==2) stream << row_block_separator << endl ;
   }
 }
 
 void Sudoku::print_number_of_options() const
 {
-  for (size_t i = 0 ; i < 81 ; i++)
+  cout << row_block_separator << endl ;
+  for (size_t i = 0 ; i < 9 ; i++)
   {
-    vector<size_t> options(list_of_options(i)) ;
-    cout << options.size() ;
-    utils::add_separator(i, 9, cout) ;
+    // Use buffer to print whole lines (important if we print to std::err)
+    // Otherwise, we will print each junk in a separate line
+    stringstream row ;
+    row << "|" ;
+    for (size_t j = i*9 ; j < (i+1)*9 ; j++)
+    {
+      row << list_of_options(j).size() ;
+      utils::add_separator_block(j, 3, row) ;
+    }
+    cout << row.str() << endl ;
+    if (i%3==2) cout << row_block_separator << endl ;
   }
 }
 
