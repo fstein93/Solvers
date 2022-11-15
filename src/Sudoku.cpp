@@ -21,7 +21,7 @@ void Sudoku::setup_options()
   {
     if (Sudoku_Line::is_valid_number(board_[i]))
     {
-      options_.push_back(vector<size_t>()) ;
+      options_.push_back(vector<size_t>({i})) ;
     }
     else
     {
@@ -62,7 +62,7 @@ void Sudoku::print_number_of_options() const
     row << "|" ;
     for (size_t j = i*9 ; j < (i+1)*9 ; j++)
     {
-      row << list_of_options(j).size() ;
+      row << (options_[j]).size() ;
       utils::add_separator_block(j, 3, row) ;
     }
     cout << row.str() << endl ;
