@@ -21,7 +21,7 @@ void Sudoku::setup_options()
   {
     if (Sudoku_Line::is_valid_number(board_[i]))
     {
-      options_.push_back(vector<size_t>({i})) ;
+      options_.push_back(vector<size_t>({board_[i]})) ;
     }
     else
     {
