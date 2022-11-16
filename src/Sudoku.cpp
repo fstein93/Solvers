@@ -25,21 +25,7 @@ void Sudoku::setup_options()
     }
     else
     {
-      // Extract local row/col/block and exclude already set numbers
-      bool options[9] = {true, true, true, true, true, true, true, true, true} ;
-      extract_row(i).remove_options(options) ;
-      extract_col(i).remove_options(options) ;
-      extract_block(i).remove_options(options) ;
-      // Add the new options 
-      vector<size_t> new_options ;
-      for (size_t j = 0 ; j < 9 ; j++)
-      {
-        if (options[j])
-        {
-          new_options.push_back(j+1) ;
-        }
-      }
-      options_.push_back(new_options) ;
+      options_.push_back(list_of_options_low(i)) ;
     }
   }
   options_.resize(81) ;
@@ -191,6 +177,13 @@ vector<size_t> Sudoku::list_of_options(const size_t global) const
 {
   // Field is already set, so there is just this single option
   if (Sudoku_Line::is_valid_number(board_[global])) return vector<size_t>({board_[global]}) ;
+  return list_of_options_low(global) ;
+}
+
+
+// Determine the new options of a given field
+vector<size_t> Sudoku::list_of_options_low(const size_t global) const
+{
   // Extract local row/col/block and exclude already set numbers
   bool options[9] = {true, true, true, true, true, true, true, true, true} ;
   extract_row(global).remove_options(options) ;
