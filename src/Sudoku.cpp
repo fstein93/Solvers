@@ -21,10 +21,14 @@ void Sudoku::setup_options()
   {
     if (Sudoku_Line::is_valid_number(board_[i]))
     {
+//cerr << "pushed " << i << " " << board_[i] << endl ;
       options_.push_back(vector<size_t>({board_[i]})) ;
     }
     else
     {
+/*cerr << "pushed " << i ;
+for (const auto& x : list_of_options_low(i)) cerr << " " << x ;
+cerr << endl ;*/
       options_.push_back(list_of_options_low(i)) ;
     }
   }
@@ -169,15 +173,16 @@ Sudoku_Line Sudoku::extract_block(const size_t global) const
 // Determine the number of options of a given field
 size_t Sudoku::number_of_options(const size_t global) const
 {
-  return (options_[global]).size() ;
+  return list_of_options(global).size() ;
 }
 
 // Determine the new options of a given field
 vector<size_t> Sudoku::list_of_options(const size_t global) const
 {
-  // Field is already set, so there is just this single option
-  if (Sudoku_Line::is_valid_number(board_[global])) return vector<size_t>({board_[global]}) ;
-  return list_of_options_low(global) ;
+  /*cerr << "found  " << global ;
+  for (const auto& x : options_[global]) cerr << " " << x ;
+  cerr << endl ;*/
+  return options_[global] ;
 }
 
 
