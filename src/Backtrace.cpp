@@ -40,7 +40,7 @@ void Backtrace::print_any_solution() const
 
 void Backtrace::find_any_solution()
 {
-  while (solutions.empty() && !solution_candidates.empty())
+  while (!decide_any_solution())
   {
     step() ;
   }
@@ -48,7 +48,7 @@ void Backtrace::find_any_solution()
 
 void Backtrace::find_unique_solution()
 {
-  while (solutions.size() < 2 && !solution_candidates.empty())
+  while (!decide_unique_solution())
   {
     step() ;
   }
@@ -56,7 +56,7 @@ void Backtrace::find_unique_solution()
 
 void Backtrace::find_all_solutions()
 {
-  while (!solution_candidates.empty())
+  while (!is_completely_solved())
   {
     step() ;
   }
