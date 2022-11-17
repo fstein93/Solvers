@@ -29,7 +29,7 @@ public:
   // Get a list of next possible candidates
   std::vector<Sudoku> get_next_candidates() const ;
   // Determine the new options of a given field
-  std::vector<size_t> list_of_options(const size_t global) const ;
+  std::vector<size_t> list_of_options(const size_t global) const {return options_[global] ; };
 private:
   void setup_options() ;
   std::vector<size_t> list_of_options_low(const size_t global) const ;
@@ -42,7 +42,7 @@ private:
   static size_t constexpr global2col(const size_t global) {return global%9 ;} ;
   static size_t constexpr global2block(const size_t global) {return global2row(global)/3*3+global2col(global)/3 ;} ;
   // Determine the number of options of a given field
-  size_t number_of_options(const size_t global) const ;
+  size_t number_of_options(const size_t global) const {return list_of_options(global).size() ; };
   // The actual container
   std::vector<size_t> board_ ;
   std::vector<std::vector<size_t>> options_ ;

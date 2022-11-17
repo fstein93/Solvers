@@ -23,15 +23,29 @@ Sudoku::Sudoku(const std::vector<size_t> board, const size_t field, const size_t
 
 void Sudoku::setup_options()
 {
-  for (size_t i = 0 ; i < 81 ; i++)
+  for (size_t global = 0 ; global < 81 ; global++)
   {
-    if (Sudoku_Line::is_valid_number(board_[i]))
+    if (Sudoku_Line::is_valid_number(board_[global]))
     {
-      options_.push_back(vector<size_t>({board_[i]})) ;
+      options_.push_back(vector<size_t>({board_[global]})) ;
     }
     else
     {
-      options_.push_back(list_of_options_low(i)) ;
+      // Extract local row/col/block and exclude already set numbers
+      bool options[9] = {true, true, true, true, true, true, true, true, true} ;
+      extract_row(global).remove_options(options) ;
+      extract_col(global).remove_options(options) ;
+      extract_block(global).remove_options(options) ;
+      // Add the new options
+      vector<size_t> new_options ;
+      for (size_t i = 0 ; i < 9 ; i++)
+      {
+       if (options[i])
+        {
+          new_options.push_back(i+1) ;
+        }
+      }
+      options_.push_back(new_options) ;
     }
   }
   options_.resize(81) ;
@@ -166,36 +180,4 @@ Sudoku_Line Sudoku::extract_block(const size_t global) const
 {
   const size_t first_element = global - (global2row(global)%3)*9 - global2col(global)%3 ;
   return Sudoku_Line({board_[first_element], board_[first_element+1], board_[first_element+2], board_[first_element+9], board_[first_element+10], board_[first_element+11], board_[first_element+18], board_[first_element+19], board_[first_element+20]}) ;
-}
-
-// Determine the number of options of a given field
-size_t Sudoku::number_of_options(const size_t global) const
-{
-  return list_of_options(global).size() ;
-}
-
-// Determine the new options of a given field
-vector<size_t> Sudoku::list_of_options(const size_t global) const
-{
-  return options_[global] ;
-}
-
-// Determine the new options of a given field
-vector<size_t> Sudoku::list_of_options_low(const size_t global) const
-{
-  // Extract local row/col/block and exclude already set numbers
-  bool options[9] = {true, true, true, true, true, true, true, true, true} ;
-  extract_row(global).remove_options(options) ;
-  extract_col(global).remove_options(options) ;
-  extract_block(global).remove_options(options) ;
-  // Add the new options
-  vector<size_t> new_options ;
-  for (size_t i = 0 ; i < 9 ; i++)
-  {
-    if (options[i])
-    {
-      new_options.push_back(i+1) ;
-    }
-  }
-  return new_options ;
 }
