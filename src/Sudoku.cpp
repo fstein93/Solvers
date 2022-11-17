@@ -15,20 +15,22 @@ using namespace std ;
 
 const string row_block_separator = "+-----+-----+-----+" ;
 
+Sudoku::Sudoku(const std::vector<size_t> board, const size_t field, const size_t element) : board_(board)
+{
+  board_[field] = element ;
+  setup_options() ;
+}
+
 void Sudoku::setup_options()
 {
   for (size_t i = 0 ; i < 81 ; i++)
   {
     if (Sudoku_Line::is_valid_number(board_[i]))
     {
-//cerr << "pushed " << i << " " << board_[i] << endl ;
       options_.push_back(vector<size_t>({board_[i]})) ;
     }
     else
     {
-/*cerr << "pushed " << i ;
-for (const auto& x : list_of_options_low(i)) cerr << " " << x ;
-cerr << endl ;*/
       options_.push_back(list_of_options_low(i)) ;
     }
   }
@@ -138,13 +140,9 @@ std::vector<Sudoku> Sudoku::get_next_candidates() const
 {
   vector<Sudoku> list_of_candidates ;
   const size_t next_field = field_with_fewest_options() ;
-  const vector<size_t> new_options = list_of_options(next_field) ;
-  Sudoku next_sudoku(board_) ;
-  size_t& element2adopt = next_sudoku.board_[next_field] ;
-  for (const size_t& element : new_options)
+  for (const size_t& element : list_of_options(next_field))
   {
-    element2adopt = element ;
-    list_of_candidates.push_back(next_sudoku) ;
+    list_of_candidates.push_back(Sudoku(board_, next_field, element)) ;
   }
   return list_of_candidates ;
 }
@@ -179,12 +177,8 @@ size_t Sudoku::number_of_options(const size_t global) const
 // Determine the new options of a given field
 vector<size_t> Sudoku::list_of_options(const size_t global) const
 {
-  /*cerr << "found  " << global ;
-  for (const auto& x : options_[global]) cerr << " " << x ;
-  cerr << endl ;*/
   return options_[global] ;
 }
-
 
 // Determine the new options of a given field
 vector<size_t> Sudoku::list_of_options_low(const size_t global) const

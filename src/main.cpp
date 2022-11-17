@@ -65,7 +65,7 @@ int main()
                   0, 0, 0, 0, 0, 0, 0, 7, 0} ;
   Sudoku sudoku4(input_unsolved) ;
   write_sudoku(sudoku4) ;
-/*  Backtrace backtrace(sudoku4) ;
+  Backtrace backtrace(sudoku4) ;
   backtrace.print_any_solution() ;
   backtrace.find_any_solution() ;
   backtrace.print_any_solution() ;
@@ -98,7 +98,7 @@ int main()
   backtrace2.find_unique_solution() ;
   backtrace2.has_unique_solution() ;
   backtrace2.find_all_solutions() ;
-  cout << "Total number of solutions: " << backtrace2.number_of_solutions() << endl ;*/
+  cout << "Total number of solutions: " << backtrace2.number_of_solutions() << endl ;
 
   return 0 ;
 }

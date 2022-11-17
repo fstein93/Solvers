@@ -13,6 +13,7 @@ public:
   Sudoku() : board_(81) {setup_options() ;} ;
   Sudoku(const size_t board[81]) : board_(board, board+81) {setup_options();} ;
   Sudoku(const std::vector<size_t> board) : board_(board) {board_.resize(81) ; setup_options() ;} ;
+  Sudoku(const std::vector<size_t> board, const size_t field, const size_t element) ;
   // Print Sudoku to a stream
   void print(std::ostream& stream) const ;
   // Print number of options for each field
