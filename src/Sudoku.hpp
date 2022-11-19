@@ -40,7 +40,13 @@ private:
   // Convert global index to row/col/block numbers
   static size_t constexpr global2row(const size_t global) {return global/9 ;} ;
   static size_t constexpr global2col(const size_t global) {return global%9 ;} ;
-  static size_t constexpr global2block(const size_t global) {return global2row(global)/3*3+global2col(global)/3 ;} ;
+  static size_t constexpr global2rowblock(const size_t global) {return global2row(global)/3 ;} ;
+  static size_t constexpr global2colblock(const size_t global) {return global2col(global)/3 ;} ;
+  static size_t constexpr global2block(const size_t global) {return 3*global2row(global)+global2colblock(global) ;} ;
+  // Get indices of all elements in the same row/col/block
+  static std::vector<size_t> indices_of_same_row(const size_t global) ;
+  static std::vector<size_t> indices_of_same_col(const size_t global) ;
+  static std::vector<size_t> indices_of_same_block(const size_t global) ;
   // Determine the number of options of a given field
   size_t number_of_options(const size_t global) const {return list_of_options(global).size() ; };
   // The actual container
