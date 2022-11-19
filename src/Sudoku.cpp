@@ -21,25 +21,27 @@ Sudoku::Sudoku(const Sudoku& sudoku, const size_t field, const size_t element) :
   const size_t row2change = global2row(field) ;
   const size_t col2change = global2col(field) ;
   const size_t block2change = global2block(field) ;
-  for (size_t idx = 0 ; idx < 81 ; idx++)
+  size_t idx = 0 ;
+  for (const vector<size_t> options : sudoku.options_)
   {
     if (global2row(idx) != row2change && global2col(idx) != col2change && global2block(idx) != block2change)
     {
-      options_.push_back(sudoku.options_[idx]) ;
+      options_.push_back(options) ;
     }
     else if (idx != field)
     {
-      vector<size_t> options ;
-      for (const size_t& el : sudoku.options_[idx])
+      vector<size_t> new_options ;
+      for (const size_t& el : options)
       {
-        if (el != element) options.push_back(el) ;
+        if (el != element) new_options.push_back(el) ;
       }
-      options_.push_back(options) ;
+      options_.push_back(new_options) ;
     }
     else
     {
       options_.push_back(vector<size_t>({element})) ;
     }
+++idx ;
   }
 }
 
