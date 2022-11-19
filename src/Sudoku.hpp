@@ -32,8 +32,8 @@ public:
   // Determine the new options of a given field
   std::vector<size_t> list_of_options(const size_t global) const {return options_[global] ; };
 private:
+  // Setup options_ vector from the board array
   void setup_options() ;
-  std::vector<size_t> list_of_options_low(const size_t global) const ;
   // Extract row/col/block containing a given element
   Sudoku_Line extract_row(const size_t global) const ;
   Sudoku_Line extract_col(const size_t global) const ;
