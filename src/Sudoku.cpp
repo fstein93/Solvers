@@ -15,16 +15,16 @@ using namespace std ;
 
 const string row_block_separator = "+-----+-----+-----+" ;
 
-Sudoku::Sudoku(const Sudoku& sudoku, const size_t field, const size_t element) : board_(sudoku.board_), grid(3,3)
+Sudoku::Sudoku(const Sudoku& sudoku, const size_t field, const size_t element) : board_(sudoku.board_), grid_(3,3)
 {
   board_[field] = element ;
-  const size_t row2change = grid.global2row(field) ;
-  const size_t col2change = grid.global2col(field) ;
-  const size_t block2change = global2block(field) ;
+  const size_t row2change = grid_.global2row(field) ;
+  const size_t col2change = grid_.global2col(field) ;
+  const size_t block2change = grid_.global2block(field) ;
   size_t idx = 0 ;
   for (const vector<size_t> options : sudoku.options_)
   {
-    if (grid.global2row(idx) != row2change && grid.global2col(idx) != col2change && global2block(idx) != block2change)
+    if (grid_.global2row(idx) != row2change && grid_.global2col(idx) != col2change && grid_.global2block(idx) != block2change)
     {
       options_.push_back(options) ;
     }
@@ -190,18 +190,18 @@ std::vector<Sudoku> Sudoku::get_next_candidates() const
 // Then, compile elements of the given set starting from the first element
 Sudoku_Line Sudoku::extract_row(const size_t global) const
 {
-  const size_t first_element = 9*grid.global2row(global) ;
+  const size_t first_element = 9*grid_.global2row(global) ;
   return Sudoku_Line({board_[first_element], board_[first_element+1], board_[first_element+2], board_[first_element+3], board_[first_element+4], board_[first_element+5], board_[first_element+6], board_[first_element+7], board_[first_element+8]}) ;
 }
 
 Sudoku_Line Sudoku::extract_col(const size_t global) const
 {
-  const size_t first_element = grid.global2col(global) ;
+  const size_t first_element = grid_.global2col(global) ;
   return Sudoku_Line({board_[first_element], board_[first_element+9], board_[first_element+18], board_[first_element+27], board_[first_element+36], board_[first_element+45], board_[first_element+54], board_[first_element+63], board_[first_element+72]}) ;
 }
 
 Sudoku_Line Sudoku::extract_block(const size_t global) const
 {
-  const size_t first_element = 3*global2colblock(global)+27*global2rowblock(global) ;
+  const size_t first_element = 3*grid_.global2colblock(global)+27*grid_.global2rowblock(global) ;
   return Sudoku_Line({board_[first_element], board_[first_element+1], board_[first_element+2], board_[first_element+9], board_[first_element+10], board_[first_element+11], board_[first_element+18], board_[first_element+19], board_[first_element+20]}) ;
 }
