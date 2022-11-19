@@ -5,14 +5,15 @@
 #include <vector>
 #include <iostream>
 #include "Sudoku_Line.hpp"
+#include "Sudoku_Grid.hpp"
 
 class Sudoku
 {
 public:
   // Constructors
-  Sudoku() : board_(81) {setup_options() ;} ;
-  Sudoku(const size_t board[81]) : board_(board, board+81) {setup_options();} ;
-  Sudoku(const std::vector<size_t> board) : board_(board) {board_.resize(81) ; setup_options() ;} ;
+  Sudoku() : board_(81), grid(3,3) {setup_options() ;} ;
+  Sudoku(const size_t board[81]) : board_(board, board+81), grid(3,3) {setup_options();} ;
+  Sudoku(const std::vector<size_t> board) : board_(board), grid(3,3) {board_.resize(81) ; setup_options() ;} ;
   Sudoku(const Sudoku& sudoku, const size_t field, const size_t element) ;
   // Print Sudoku to a stream
   void print(std::ostream& stream) const ;
@@ -52,6 +53,8 @@ private:
   // The actual container
   std::vector<size_t> board_ ;
   std::vector<std::vector<size_t>> options_ ;
+  // Information on the Grid
+  const Sudoku_Grid grid ;
 };
 
 #endif

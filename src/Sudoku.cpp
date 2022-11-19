@@ -15,7 +15,7 @@ using namespace std ;
 
 const string row_block_separator = "+-----+-----+-----+" ;
 
-Sudoku::Sudoku(const Sudoku& sudoku, const size_t field, const size_t element) : board_(sudoku.board_)
+Sudoku::Sudoku(const Sudoku& sudoku, const size_t field, const size_t element) : board_(sudoku.board_), grid(3,3)
 {
   board_[field] = element ;
   const size_t row2change = global2row(field) ;
