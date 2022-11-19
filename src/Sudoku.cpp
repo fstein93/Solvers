@@ -15,10 +15,32 @@ using namespace std ;
 
 const string row_block_separator = "+-----+-----+-----+" ;
 
-Sudoku::Sudoku(const std::vector<size_t> board, const size_t field, const size_t element) : board_(board)
+Sudoku::Sudoku(const Sudoku& sudoku, const size_t field, const size_t element) : board_(sudoku.board_)
 {
   board_[field] = element ;
-  setup_options() ;
+  const size_t row2change = global2row(field) ;
+  const size_t col2change = global2col(field) ;
+  const size_t block2change = global2block(field) ;
+  for (size_t idx = 0 ; idx < 81 ; idx++)
+  {
+    if (global2row(idx) != row2change && global2col(idx) != col2change && global2block(idx) != block2change)
+    {
+      options_.push_back(sudoku.options_[idx]) ;
+    }
+    else if (idx != field)
+    {
+      vector<size_t> options ;
+      for (const size_t& el : sudoku.options_[idx])
+      {
+        if (el != element) options.push_back(el) ;
+      }
+      options_.push_back(options) ;
+    }
+    else
+    {
+      options_.push_back(vector<size_t>({element})) ;
+    }
+  }
 }
 
 void Sudoku::setup_options()
