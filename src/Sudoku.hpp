@@ -13,7 +13,7 @@ public:
   // Constructors
   Sudoku() : board_(81), grid(3,3) {setup_options() ;} ;
   Sudoku(const size_t board[81]) : board_(board, board+81), grid(3,3) {setup_options();} ;
-  Sudoku(const std::vector<size_t> board) : board_(board), grid(3,3) {board_.resize(81) ; setup_options() ;} ;
+  Sudoku(const std::vector<size_t> board) : board_(board), grid(3,3) {board_.resize(grid.total_number_of_elements()) ; setup_options() ;} ;
   Sudoku(const Sudoku& sudoku, const size_t field, const size_t element) ;
   // Print Sudoku to a stream
   void print(std::ostream& stream) const ;
@@ -39,11 +39,9 @@ private:
   Sudoku_Line extract_col(const size_t global) const ;
   Sudoku_Line extract_block(const size_t global) const ;
   // Convert global index to row/col/block numbers
-  static size_t constexpr global2row(const size_t global) {return global/9 ;} ;
-  static size_t constexpr global2col(const size_t global) {return global%9 ;} ;
-  static size_t constexpr global2rowblock(const size_t global) {return global2row(global)/3 ;} ;
-  static size_t constexpr global2colblock(const size_t global) {return global2col(global)/3 ;} ;
-  static size_t constexpr global2block(const size_t global) {return 3*global2row(global)+global2colblock(global) ;} ;
+  size_t global2rowblock(const size_t global) const {return grid.global2row(global)/3 ;} ;
+  size_t global2colblock(const size_t global) const {return grid.global2col(global)/3 ;} ;
+  size_t global2block(const size_t global) const {return 3*global2rowblock(global)+global2colblock(global) ;} ;
   // Get indices of all elements in the same row/col/block
   static std::vector<size_t> indices_of_same_row(const size_t global) ;
   static std::vector<size_t> indices_of_same_col(const size_t global) ;
