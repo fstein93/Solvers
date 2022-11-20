@@ -190,14 +190,18 @@ std::vector<Sudoku> Sudoku::get_next_candidates() const
 // Then, compile elements of the given set starting from the first element
 Sudoku_Line Sudoku::extract_row(const size_t global) const
 {
-  const size_t first_element = 9*grid_.global2row(global) ;
-  return Sudoku_Line(vector<size_t>({board_[first_element], board_[first_element+1], board_[first_element+2], board_[first_element+3], board_[first_element+4], board_[first_element+5], board_[first_element+6], board_[first_element+7], board_[first_element+8]})) ;
+  vector<size_t> row ;
+  row.reserve(9) ;
+  for (const size_t& idx : grid_.elements_in_same_row_as(global)) row.push_back(board_[idx]) ;
+  return Sudoku_Line(row) ;
 }
 
 Sudoku_Line Sudoku::extract_col(const size_t global) const
 {
-  const size_t first_element = grid_.global2col(global) ;
-  return Sudoku_Line(vector<size_t>({board_[first_element], board_[first_element+9], board_[first_element+18], board_[first_element+27], board_[first_element+36], board_[first_element+45], board_[first_element+54], board_[first_element+63], board_[first_element+72]})) ;
+  vector<size_t> col ;
+  col.reserve(9) ;
+  for (const size_t& idx : grid_.elements_in_same_col_as(global)) col.push_back(board_[idx]) ;
+  return Sudoku_Line(col) ;
 }
 
 Sudoku_Line Sudoku::extract_block(const size_t global) const

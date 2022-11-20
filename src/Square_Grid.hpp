@@ -1,6 +1,8 @@
 #ifndef SQUARE_GRID_HPP
 #define SQUARE_GRID_HPP
 
+#include <vector>
+
 // This object represents a square grid of fixed length
 // and provides some helper routines to deal with coordinates
 // The class assumes row-major order of the elements
@@ -17,6 +19,9 @@ public:
   // Getters
   size_t get_number_of_cols() const {return number_of_cols_ ;} ;
   size_t total_number_of_elements() const {return number_of_fields_ ;} ;
+  // Determine indices of elements in the same row/col as the given element
+  std::vector<size_t> elements_in_same_row_as(const size_t global) const ;
+  std::vector<size_t> elements_in_same_col_as(const size_t global) const ;
 protected:
   const size_t number_of_cols_ ;
   const size_t number_of_fields_ ;
