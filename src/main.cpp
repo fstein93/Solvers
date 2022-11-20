@@ -27,10 +27,12 @@ void write_sudoku(Sudoku& sudoku) noexcept
 
 int main()
 {
-  const Square_Grid grid(9) ;
+  const Sudoku_Grid grid(3, 3) ;
   for (const size_t& idx : grid.elements_in_same_row_as(42)) cout << idx << " " ;
   cout << endl ;
   for (const size_t& idx : grid.elements_in_same_col_as(42)) cout << idx << " " ;
+  cout << endl ;
+  for (const size_t& idx : grid.elements_in_same_block_as(42)) cout << idx << " " ;
   cout << endl ;
 
   Sudoku sudoku1 ;

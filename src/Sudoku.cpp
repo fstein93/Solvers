@@ -207,6 +207,8 @@ Sudoku_Line Sudoku::extract_col(const size_t global) const noexcept
 
 Sudoku_Line Sudoku::extract_block(const size_t global) const noexcept
 {
-  const size_t first_element = 3*grid_.global2colblock(global)+27*grid_.global2rowblock(global) ;
-  return Sudoku_Line(vector<size_t>({board_[first_element], board_[first_element+1], board_[first_element+2], board_[first_element+9], board_[first_element+10], board_[first_element+11], board_[first_element+18], board_[first_element+19], board_[first_element+20]})) ;
+  vector<size_t> block ;
+  block.reserve(9) ;
+  for (const size_t& idx : grid_.elements_in_same_block_as(global)) block.push_back(board_[idx]) ;
+  return Sudoku_Line(block) ;
 }
