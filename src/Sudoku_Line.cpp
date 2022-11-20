@@ -4,7 +4,7 @@
 
 using namespace std ;
 
-void Sudoku_Line::print() const
+void Sudoku_Line::print() const noexcept
 {
   for (const size_t& element : line_)
   {
@@ -13,7 +13,7 @@ void Sudoku_Line::print() const
   cout << endl ;
 }
 
-bool Sudoku_Line::test() const
+bool Sudoku_Line::test() const noexcept
 {
   // Find the number in the line
   bool found[] = {false, false, false, false, false, false, false, false, false} ;
@@ -31,7 +31,7 @@ bool Sudoku_Line::test() const
   return true ;
 }
 
-void Sudoku_Line::remove_options(bool (&options)[9]) const
+void Sudoku_Line::remove_options(bool (&options)[9]) const noexcept
 {
   for (const size_t& number : line_)
   {

@@ -11,7 +11,7 @@ using namespace std ;
 // - Add more tests
 // - Add input from file (standard input too tedious)
 
-void write_sudoku(Sudoku& sudoku)
+void write_sudoku(Sudoku& sudoku) noexcept
 {
   sudoku.print(cout) ;
   cout << "Valid: " << sudoku.is_valid()  << endl ;

@@ -12,10 +12,11 @@ using namespace std ;
 // - Accelerate Sudoku::field_with_fewest_options
 // - Accelerate Sudoku::number_of_options
 // - Refactor print functions (maybe with Lambda functions)
+// - Declare a function to determine all fields within the same row, col and block
 
 const string row_block_separator = "+-----+-----+-----+" ;
 
-Sudoku::Sudoku(const Sudoku& sudoku, const size_t field, const size_t element) : board_(sudoku.board_), grid_(3,3)
+Sudoku::Sudoku(const Sudoku& sudoku, const size_t field, const size_t element) noexcept : board_(sudoku.board_), grid_(3,3)
 {
   board_[field] = element ;
   const size_t row2change = grid_.global2row(field) ;
@@ -45,7 +46,7 @@ Sudoku::Sudoku(const Sudoku& sudoku, const size_t field, const size_t element) :
   }
 }
 
-void Sudoku::setup_options()
+void Sudoku::setup_options() noexcept
 {
   for (size_t global = 0 ; global < 81 ; global++)
   {
@@ -76,7 +77,7 @@ void Sudoku::setup_options()
 }
 
 // Print Sudoku row-wise
-void Sudoku::print(ostream& stream=cout) const
+void Sudoku::print(ostream& stream=cout) const noexcept
 {
   stream << row_block_separator << endl ;
   for (size_t i = 0 ; i < 9 ; i++)
@@ -95,7 +96,7 @@ void Sudoku::print(ostream& stream=cout) const
   }
 }
 
-void Sudoku::print_number_of_options() const
+void Sudoku::print_number_of_options() const noexcept
 {
   cout << row_block_separator << endl ;
   for (size_t i = 0 ; i < 9 ; i++)
@@ -117,7 +118,7 @@ void Sudoku::print_number_of_options() const
 // Check validity of a Sudoku
 // - Check for unvalid numbers
 // - Check row/col/block
-bool Sudoku::is_valid() const
+bool Sudoku::is_valid() const noexcept
 {
   for (const size_t& element : board_)
   {
@@ -144,7 +145,7 @@ bool Sudoku::is_valid() const
   return true ;
 }
 
-bool Sudoku::is_completely_filled() const
+bool Sudoku::is_completely_filled() const noexcept
 {
   for (const size_t& element : board_)
   {
@@ -153,7 +154,7 @@ bool Sudoku::is_completely_filled() const
   return true ;
 }
 
-size_t Sudoku::field_with_fewest_options() const
+size_t Sudoku::field_with_fewest_options() const noexcept
 {
   size_t field = 0 ;
   size_t min_number_of_options = 9 ;
@@ -174,7 +175,7 @@ size_t Sudoku::field_with_fewest_options() const
 }
 
 // Get a list of next possible candidates
-std::vector<Sudoku> Sudoku::get_next_candidates() const
+std::vector<Sudoku> Sudoku::get_next_candidates() const noexcept
 {
   vector<Sudoku> list_of_candidates ;
   const size_t next_field = field_with_fewest_options() ;
@@ -188,7 +189,7 @@ std::vector<Sudoku> Sudoku::get_next_candidates() const
 // Extraction routines
 // First, determine first element of the given set
 // Then, compile elements of the given set starting from the first element
-Sudoku_Line Sudoku::extract_row(const size_t global) const
+Sudoku_Line Sudoku::extract_row(const size_t global) const noexcept
 {
   vector<size_t> row ;
   row.reserve(9) ;
@@ -196,7 +197,7 @@ Sudoku_Line Sudoku::extract_row(const size_t global) const
   return Sudoku_Line(row) ;
 }
 
-Sudoku_Line Sudoku::extract_col(const size_t global) const
+Sudoku_Line Sudoku::extract_col(const size_t global) const noexcept
 {
   vector<size_t> col ;
   col.reserve(9) ;
@@ -204,7 +205,7 @@ Sudoku_Line Sudoku::extract_col(const size_t global) const
   return Sudoku_Line(col) ;
 }
 
-Sudoku_Line Sudoku::extract_block(const size_t global) const
+Sudoku_Line Sudoku::extract_block(const size_t global) const noexcept
 {
   const size_t first_element = 3*grid_.global2colblock(global)+27*grid_.global2rowblock(global) ;
   return Sudoku_Line(vector<size_t>({board_[first_element], board_[first_element+1], board_[first_element+2], board_[first_element+9], board_[first_element+10], board_[first_element+11], board_[first_element+18], board_[first_element+19], board_[first_element+20]})) ;

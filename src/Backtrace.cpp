@@ -3,7 +3,7 @@
 
 using namespace std ;
 
-Backtrace::Backtrace(const Sudoku& sudoku)
+Backtrace::Backtrace(const Sudoku& sudoku) noexcept
 {
   if (sudoku.is_valid())
   {
@@ -18,7 +18,7 @@ Backtrace::Backtrace(const Sudoku& sudoku)
   }
 }
 
-void Backtrace::print_any_solution() const
+void Backtrace::print_any_solution() const noexcept
 {
   if (solutions.empty())
   {
@@ -38,7 +38,7 @@ void Backtrace::print_any_solution() const
   }
 }
 
-void Backtrace::find_any_solution()
+void Backtrace::find_any_solution() noexcept
 {
   while (!decide_any_solution())
   {
@@ -46,7 +46,7 @@ void Backtrace::find_any_solution()
   }
 }
 
-void Backtrace::find_unique_solution()
+void Backtrace::find_unique_solution() noexcept
 {
   while (!decide_unique_solution())
   {
@@ -54,7 +54,7 @@ void Backtrace::find_unique_solution()
   }
 }
 
-void Backtrace::find_all_solutions()
+void Backtrace::find_all_solutions() noexcept
 {
   while (!is_completely_solved())
   {
@@ -62,7 +62,7 @@ void Backtrace::find_all_solutions()
   }
 }
 
-void Backtrace::step()
+void Backtrace::step() noexcept
 {
   const Sudoku candidate(solution_candidates.back()) ;
   solution_candidates.pop_back() ;

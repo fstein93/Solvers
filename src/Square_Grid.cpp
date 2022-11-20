@@ -6,7 +6,7 @@
 
 using namespace std ;
 
-vector<size_t> Square_Grid::elements_in_same_row_as(const size_t global) const
+vector<size_t> Square_Grid::elements_in_same_row_as(const size_t global) const noexcept
 {
   vector<size_t> indices ;
   indices.reserve(number_of_cols_) ;
@@ -15,7 +15,7 @@ vector<size_t> Square_Grid::elements_in_same_row_as(const size_t global) const
   return indices ;
 }
 
-vector<size_t> Square_Grid::elements_in_same_col_as(const size_t global) const
+vector<size_t> Square_Grid::elements_in_same_col_as(const size_t global) const noexcept
 {
   vector<size_t> indices ;
   indices.reserve(number_of_cols_) ;

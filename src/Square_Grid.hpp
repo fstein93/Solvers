@@ -10,18 +10,18 @@ class Square_Grid
 {
 public:
   // Constructor
-  Square_Grid(const size_t number_of_cols) : number_of_cols_(number_of_cols), number_of_fields_(number_of_cols*number_of_cols) {} ;
+  Square_Grid(const size_t number_of_cols) noexcept : number_of_cols_(number_of_cols), number_of_fields_(number_of_cols*number_of_cols) {} ;
   // Convert global to local coordinates
-  size_t global2row(const size_t global) const {return global/number_of_cols_ ;} ;
-  size_t global2col(const size_t global) const {return global%number_of_cols_ ;} ;
+  size_t global2row(const size_t global) const noexcept {return global/number_of_cols_ ;} ;
+  size_t global2col(const size_t global) const noexcept {return global%number_of_cols_ ;} ;
   // Convert local to global coordinates
-  size_t local2global(const size_t row, const size_t col) const {return row*number_of_cols_+col ;} ;
+  size_t local2global(const size_t row, const size_t col) const noexcept {return row*number_of_cols_+col ;} ;
   // Getters
-  size_t get_number_of_cols() const {return number_of_cols_ ;} ;
-  size_t total_number_of_elements() const {return number_of_fields_ ;} ;
+  size_t get_number_of_cols() const noexcept {return number_of_cols_ ;} ;
+  size_t total_number_of_elements() const noexcept {return number_of_fields_ ;} ;
   // Determine indices of elements in the same row/col as the given element
-  std::vector<size_t> elements_in_same_row_as(const size_t global) const ;
-  std::vector<size_t> elements_in_same_col_as(const size_t global) const ;
+  std::vector<size_t> elements_in_same_row_as(const size_t global) const noexcept ;
+  std::vector<size_t> elements_in_same_col_as(const size_t global) const noexcept ;
 protected:
   const size_t number_of_cols_ ;
   const size_t number_of_fields_ ;
