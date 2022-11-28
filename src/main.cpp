@@ -34,6 +34,8 @@ int main()
   cout << endl ;
   for (const size_t& idx : grid.elements_in_same_block_as(42)) cout << idx << " " ;
   cout << endl ;
+  for (const size_t& idx : grid.elements_in_same_row_or_col_as(42)) cout << idx << " " ;
+  cout << endl ;
 
   Sudoku sudoku1 ;
   write_sudoku(sudoku1) ;

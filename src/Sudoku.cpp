@@ -58,8 +58,14 @@ void Sudoku::setup_options() noexcept
     {
       // Extract local row/col/block and exclude already set numbers
       bool options[9] = {true, true, true, true, true, true, true, true, true} ;
-      extract_row(global).remove_options(options) ;
-      extract_col(global).remove_options(options) ;
+      for (const size_t& idx : grid_.elements_in_same_row_or_col_as(global))
+      {
+        const size_t number = board_[idx] ;
+        if (Sudoku_Line::is_valid_number(number))
+        {
+          options[number-1] = false ;
+        }
+      }
       extract_block(global).remove_options(options) ;
       // Add the new options
       vector<size_t> new_options ;
