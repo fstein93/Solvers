@@ -22,6 +22,9 @@ public:
   // Determine indices of elements in the same row/col as the given element
   std::vector<size_t> elements_in_same_row_as(const size_t global) const noexcept ;
   std::vector<size_t> elements_in_same_col_as(const size_t global) const noexcept ;
+  // First element in the same row/col/block as the element
+  constexpr size_t first_element_in_row_of(const size_t global) const noexcept {return global-global2col(global) ;} ;
+  constexpr size_t first_element_in_col_of(const size_t global) const noexcept {return global-global2row(global)*number_of_cols_ ;} ;
 protected:
   const size_t number_of_cols_ ;
   const size_t number_of_fields_ ;
