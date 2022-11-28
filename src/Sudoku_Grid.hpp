@@ -17,6 +17,8 @@ public:
   constexpr size_t global2block(const size_t global) const noexcept {return 3*global2rowblock(global)+global2colblock(global) ;} ;
   // Function to loop over elements of a block of an element
   std::vector<size_t> elements_in_same_block_as(const size_t global) const noexcept ;
+  // Function determines the index of the upper left element of the block of the given cell
+  constexpr size_t first_element_in_block_of(const size_t global) const noexcept {return number_of_rows_per_block_*number_of_cols_*global2rowblock(global)+number_of_cols_per_block_*global2colblock(global) ;} ;
 private:
   const size_t number_of_rows_per_block_, number_of_cols_per_block_ ;
 };
