@@ -19,6 +19,8 @@ public:
   std::vector<size_t> elements_in_same_block_as(const size_t global) const noexcept ;
   // Function determines the index of the upper left element of the block of the given cell
   constexpr size_t first_element_in_block_of(const size_t global) const noexcept {return number_of_rows_per_block_*number_of_cols_*global2rowblock(global)+number_of_cols_per_block_*global2colblock(global) ;} ;
+  // Function to determine the indices of all elements in the same row/block or col in as the given cell
+  std::vector<size_t> elements_in_same_row_or_col_or_blk_as(const size_t global) const noexcept ;
 private:
   const size_t number_of_rows_per_block_, number_of_cols_per_block_ ;
 };
