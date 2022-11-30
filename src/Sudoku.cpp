@@ -210,3 +210,20 @@ Sudoku_Line Sudoku::extract_block(const size_t global) const noexcept
   for (const size_t& idx : grid_.elements_in_same_block_as(global)) block.push_back(board_[idx]) ;
   return Sudoku_Line(block) ;
 }
+
+void Sudoku::simplify() noexcept
+{
+  size_t current_field = field_with_fewest_options() ;
+  vector<size_t> current_options(options_[current_field]) ;
+  while (current_options.size() == 1)
+  {
+    const size_t element = current_options[0] ;
+    board_[current_field] = element ;
+    for (const size_t& field : grid_.elements_in_same_row_or_col_or_blk_as(current_field))
+    {
+      options_[field] = utils::remove_element(options_[field], element) ;
+    }
+    current_field = field_with_fewest_options() ;
+    current_options = options_[current_field] ;
+  }
+}

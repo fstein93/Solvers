@@ -66,8 +66,9 @@ void Backtrace::step() noexcept
 {
   const Sudoku candidate(solution_candidates.back()) ;
   solution_candidates.pop_back() ;
-  for (const Sudoku& next_candidate : candidate.get_next_candidates())
+  for (Sudoku& next_candidate : candidate.get_next_candidates())
   {
+    next_candidate.simplify() ;
     if (next_candidate.is_correctly_solved())
     {
       solutions.push_back(next_candidate) ;

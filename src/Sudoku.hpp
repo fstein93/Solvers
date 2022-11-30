@@ -31,6 +31,8 @@ public:
   std::vector<Sudoku> get_next_candidates() const noexcept ;
   // Determine the new options of a given field
   std::vector<size_t> list_of_options(const size_t global) const noexcept {return options_[global] ; };
+  // Apply all obvious simplifications to a Sudoku
+  void simplify() noexcept ;
 private:
   // Setup options_ vector from the board array
   void setup_options() noexcept ;
