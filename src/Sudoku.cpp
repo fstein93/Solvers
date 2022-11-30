@@ -21,7 +21,7 @@ Sudoku::Sudoku(const Sudoku& sudoku, const size_t field, const size_t element) n
   const size_t col2change = grid_.global2col(field) ;
   const size_t block2change = grid_.global2block(field) ;
   size_t idx = 0 ;
-  for (const vector<size_t> options : sudoku.options_)
+  for (vector<size_t> options : sudoku.options_)
   {
     if (grid_.global2row(idx) != row2change && grid_.global2col(idx) != col2change && grid_.global2block(idx) != block2change)
     {
@@ -29,7 +29,8 @@ Sudoku::Sudoku(const Sudoku& sudoku, const size_t field, const size_t element) n
     }
     else if (idx != field)
     {
-      options_.push_back(utils::remove_element(options, element)) ;
+      utils::remove_element(options, element) ;
+      options_.push_back(options) ;
     }
     else
     {
@@ -221,7 +222,7 @@ void Sudoku::simplify() noexcept
     board_[current_field] = element ;
     for (const size_t& field : grid_.elements_in_same_row_or_col_or_blk_as(current_field))
     {
-      options_[field] = utils::remove_element(options_[field], element) ;
+      utils::remove_element(options_[field], element) ;
     }
     current_field = field_with_fewest_options() ;
     current_options = options_[current_field] ;
