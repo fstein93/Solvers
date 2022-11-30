@@ -3,11 +3,13 @@
 
 #include <stddef.h>
 #include <iostream>
+#include <vector>
 
 namespace utils
 {
-  void add_separator(const size_t i, const size_t line_length, std::ostream &outputstream) ;
-  void add_separator_block(const size_t i, const size_t block_size, std::ostream &outputstream) ;
+  void add_separator(const size_t i, const size_t line_length, std::ostream &outputstream) noexcept ;
+  void add_separator_block(const size_t i, const size_t block_size, std::ostream &outputstream) noexcept ;
+  std::vector<size_t> remove_element(const std::vector<size_t>& my_vector, const size_t element) noexcept ;
 }
 
 #endif

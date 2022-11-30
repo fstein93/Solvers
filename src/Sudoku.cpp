@@ -9,8 +9,6 @@ using namespace std ;
 
 // TODO
 // - Add info about how Sudoku was create (from scratch or by adding number at a given field)
-// - Accelerate Sudoku::field_with_fewest_options
-// - Accelerate Sudoku::number_of_options
 // - Refactor print functions (maybe with Lambda functions)
 // - Declare a function to determine all fields within the same row, col and block
 
@@ -31,12 +29,7 @@ Sudoku::Sudoku(const Sudoku& sudoku, const size_t field, const size_t element) n
     }
     else if (idx != field)
     {
-      vector<size_t> new_options ;
-      for (const size_t& el : options)
-      {
-        if (el != element) new_options.push_back(el) ;
-      }
-      options_.push_back(new_options) ;
+      options_.push_back(utils::remove_element(options, element)) ;
     }
     else
     {
