@@ -7,7 +7,7 @@
 // This object represents a square grid of fixed length
 // and provides some helper routines to deal with coordinates
 // The class assumes row-major order of the elements
-template <typename T=size_t>
+template <typename T>
 class Square_Grid
 {
 public:
