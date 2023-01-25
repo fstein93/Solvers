@@ -3,6 +3,7 @@
 #include "Sudoku.hpp"
 #include "utils.hpp"
 #include "Backtrace.hpp"
+#include "Square_Grid_test.hpp"
 
 using namespace std ;
 
@@ -27,6 +28,8 @@ void write_sudoku(Sudoku& sudoku) noexcept
 
 int main()
 {
+  test_Square_Grid() ;
+
   constexpr Sudoku_Grid grid(3, 3) ;
   for (const size_t& idx : grid.elements_in_same_row_as(42)) cout << idx << " " ;
   cout << endl ;
