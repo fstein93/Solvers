@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+#include <type_traits>
 
 // This object represents a square grid of fixed length
 // and provides some helper routines to deal with coordinates
@@ -10,6 +11,7 @@
 template <typename T>
 class Square_Grid
 {
+  using uT = typename std::make_unsigned<T>::type ;
 public:
   // Constructor
   constexpr Square_Grid(const T number_of_cols) noexcept : number_of_cols_(number_of_cols), number_of_fields_(number_of_cols*number_of_cols) {} ;
@@ -25,7 +27,7 @@ public:
   std::vector<T> elements_in_same_row_as(const T global) const noexcept 
   {
     std::vector<T> indices ;
-    indices.reserve(number_of_cols_) ;
+    indices.reserve((uT) number_of_cols_) ;
     const T first_element = first_element_in_row_of(global) ;
     for (T idx = first_element ; idx < first_element+number_of_cols_ ; idx++) indices.push_back(idx) ;
     return indices ;
@@ -33,7 +35,7 @@ public:
   std::vector<T> elements_in_same_col_as(const T global) const noexcept 
   {
     std::vector<T> indices ;
-    indices.reserve(number_of_cols_) ;
+    indices.reserve((uT) number_of_cols_) ;
     const T first_element = first_element_in_col_of(global) ;
     for (T idx = first_element ; idx < first_element+number_of_fields_ ; idx+=number_of_cols_) indices.push_back(idx) ;
     return indices ;

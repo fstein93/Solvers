@@ -17,6 +17,28 @@ void test_Square_Grid_low(const T grid_size)
       if (global_index != index) cerr << "Incorrect global index of field " << index << endl ;
       if (Grid1.global2row(global_index) != row) cerr << "Incorrect row index of field " << index << endl ;
       if (Grid1.global2col(global_index) != col) cerr << "Incorrect col index of field " << index << endl ;
+
+      vector<T> elements = Grid1.elements_in_same_row_as(global_index) ;
+      if (((T) elements.size()) != grid_size) cerr << "Incorrect number of elements in the same row as " << global_index << endl ;
+      for (const T& element : elements)
+      {
+        if (Grid1.global2row(element) != row) cerr << "Element of a different row found in elements_in_same_row_as of element " << index << " : " << element << endl ;
+      }
+
+      elements = Grid1.elements_in_same_col_as(global_index) ;
+      if (((T) elements.size()) != grid_size) cerr << "Incorrect number of elements in the same col as " << global_index << endl ;
+      for (const T& element : elements)
+      {
+        if (Grid1.global2col(element) != col) cerr << "Element of a different col found in elements_in_same_col_as of element " << index << " : " << element << endl ;
+      }
+
+      elements = Grid1.elements_in_same_row_or_col_as(global_index) ;
+      if (((T) elements.size()) != ((T) 2)*grid_size-((T) 1)) cerr << "Incorrect number of elements in the same row or col as " << global_index << endl ;
+      for (const T& element : elements)
+      {
+        if (Grid1.global2row(element) != row && Grid1.global2col(element) != col) cerr << "Element of a different row and col found in elements_in_same_row_or_col_as of element " << index << " : " << element << endl ;
+      }
+
       ++index ;
     }
   }
