@@ -12,6 +12,7 @@ template <typename T>
 class Square_Grid
 {
   using uT = typename std::make_unsigned<T>::type ;
+  static_assert(std::is_integral<T>::value, "Square_Grid requires an integral type") ;
 public:
   // Constructor
   constexpr Square_Grid(const T number_of_cols) noexcept : number_of_cols_(number_of_cols), number_of_fields_(number_of_cols*number_of_cols) {} ;
