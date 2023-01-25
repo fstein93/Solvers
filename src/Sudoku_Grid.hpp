@@ -6,11 +6,11 @@
 // This class represents the grid of a Sudoku board
 // and provides some helper routines
 // The routines do not check whether the input coordinates are valid
-class Sudoku_Grid : public Square_Grid
+class Sudoku_Grid : public Square_Grid<size_t>
 {
 public:
   // Sudoku
-  constexpr Sudoku_Grid(const size_t number_of_rows_per_block=3, const size_t number_of_cols_per_block=3) noexcept : Square_Grid(number_of_rows_per_block*number_of_cols_per_block), number_of_rows_per_block_(number_of_rows_per_block), number_of_cols_per_block_(number_of_cols_per_block) {} ;
+  constexpr Sudoku_Grid(const size_t number_of_rows_per_block=3, const size_t number_of_cols_per_block=3) noexcept : Square_Grid<size_t>(number_of_rows_per_block*number_of_cols_per_block), number_of_rows_per_block_(number_of_rows_per_block), number_of_cols_per_block_(number_of_cols_per_block) {} ;
   // Convert global index to coordinates of the block
   constexpr size_t global2rowblock(const size_t global) const noexcept {return global2row(global)/3 ;} ;
   constexpr size_t global2colblock(const size_t global) const noexcept {return global2col(global)/3 ;} ;
