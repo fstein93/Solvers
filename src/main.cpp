@@ -30,7 +30,7 @@ int main()
 {
   test_Square_Grid() ;
 
-  constexpr Sudoku_Grid grid(3, 3) ;
+  constexpr Sudoku_Grid<size_t> grid(3, 3) ;
   for (const size_t& idx : grid.elements_in_same_row_as(42)) cout << idx << " " ;
   cout << endl ;
   for (const size_t& idx : grid.elements_in_same_col_as(42)) cout << idx << " " ;

@@ -46,7 +46,7 @@ private:
   std::vector<size_t> board_ ;
   std::vector<std::vector<size_t>> options_ ;
   // Information on the Grid
-  const Sudoku_Grid grid_ = Sudoku_Grid(3, 3) ;
+  const Sudoku_Grid<size_t> grid_ = Sudoku_Grid<size_t>(3, 3) ;
 };
 
 #endif
