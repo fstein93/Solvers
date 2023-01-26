@@ -5,13 +5,13 @@
 using namespace std ;
 
 template <typename T>
-void test_Square_Grid_low(const T grid_size)
+void test_Square_Grid_low(const T col_size)
 {
-  Square_Grid<T> Grid1(grid_size) ;
+  Square_Grid<T> Grid1(col_size) ;
   T index = 0 ;
-  for (T row = 0 ; row < grid_size ; row++)
+  for (T row = 0 ; row < col_size ; row++)
   {
-    for (T col = 0 ; col < grid_size ; col++)
+    for (T col = 0 ; col < col_size ; col++)
     {
       const T global_index = Grid1.local2global(row, col) ;
       if (global_index != index) cerr << "Incorrect global index of field " << index << endl ;
@@ -19,21 +19,21 @@ void test_Square_Grid_low(const T grid_size)
       if (Grid1.global2col(global_index) != col) cerr << "Incorrect col index of field " << index << endl ;
 
       vector<T> elements = Grid1.elements_in_same_row_as(global_index) ;
-      if (((T) elements.size()) != grid_size) cerr << "Incorrect number of elements in the same row as " << global_index << endl ;
+      if (((T) elements.size()) != col_size) cerr << "Incorrect number of elements in the same row as " << global_index << endl ;
       for (const T& element : elements)
       {
         if (Grid1.global2row(element) != row) cerr << "Element of a different row found in elements_in_same_row_as of element " << index << " : " << element << endl ;
       }
 
       elements = Grid1.elements_in_same_col_as(global_index) ;
-      if (((T) elements.size()) != grid_size) cerr << "Incorrect number of elements in the same col as " << global_index << endl ;
+      if (((T) elements.size()) != col_size) cerr << "Incorrect number of elements in the same col as " << global_index << endl ;
       for (const T& element : elements)
       {
         if (Grid1.global2col(element) != col) cerr << "Element of a different col found in elements_in_same_col_as of element " << index << " : " << element << endl ;
       }
 
       elements = Grid1.elements_in_same_row_or_col_as(global_index) ;
-      if (((T) elements.size()) != ((T) 2)*grid_size-((T) 1)) cerr << "Incorrect number of elements in the same row or col as " << global_index << endl ;
+      if (((T) elements.size()) != ((T) 2)*col_size-((T) 1)) cerr << "Incorrect number of elements in the same row or col as " << global_index << endl ;
       for (const T& element : elements)
       {
         if (Grid1.global2row(element) != row && Grid1.global2col(element) != col) cerr << "Element of a different row and col found in elements_in_same_row_or_col_as of element " << index << " : " << element << endl ;
@@ -42,8 +42,8 @@ void test_Square_Grid_low(const T grid_size)
       ++index ;
     }
   }
-  if (Grid1.get_number_of_cols() != grid_size) cerr << "Incorrect number of cols" << endl ;
-  if (Grid1.total_number_of_elements() != grid_size*grid_size) cerr << "Incorrect number of fields" << endl ;
+  if (Grid1.get_number_of_cols() != col_size) cerr << "Incorrect number of cols" << endl ;
+  if (Grid1.total_number_of_elements() != col_size*col_size) cerr << "Incorrect number of fields" << endl ;
 }
 
 void test_Square_Grid()
