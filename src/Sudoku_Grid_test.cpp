@@ -26,6 +26,9 @@ void test_Sudoku_Grid_low(const T row_block_size, const T col_block_size)
           if (global_index != index) cerr << "Incorrect global index of field " << index << endl ;
           if (Grid1.global2row(global_index) != row) cerr << "Incorrect row index of field " << index << endl ;
           if (Grid1.global2col(global_index) != col) cerr << "Incorrect col index of field " << index << endl ;
+          if (Grid1.global2rowblock(global_index) != row_block) cerr << "Incorrect row block index of field " << index << endl ;
+          if (Grid1.global2colblock(global_index) != col_block) cerr << "Incorrect col block index of field " << index << endl ;
+          if (Grid1.global2block(global_index) != row_block_size*row_block+col_block) cerr << "Incorrect block index of field " << index << endl ;
 
           vector<T> elements = Grid1.elements_in_same_row_as(global_index) ;
           if (((T) elements.size()) != col_size) cerr << "Incorrect number of elements in the same row as " << global_index << endl ;
