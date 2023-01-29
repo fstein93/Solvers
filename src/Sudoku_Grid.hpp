@@ -14,11 +14,11 @@ class Sudoku_Grid : public Square_Grid<T>
   static_assert(std::is_integral<T>::value, "Square_Grid requires an integral type") ;
 public:
   // Sudoku
-  constexpr Sudoku_Grid(const T number_of_rows_per_block=3, const T number_of_cols_per_block=3) noexcept : Square_Grid<T>(number_of_rows_per_block*number_of_cols_per_block), number_of_rows_per_block_(number_of_rows_per_block), number_of_cols_per_block_(number_of_cols_per_block) {} ;
+  constexpr Sudoku_Grid(const T number_of_rows_per_block, const T number_of_cols_per_block) noexcept : Square_Grid<T>(number_of_rows_per_block*number_of_cols_per_block), number_of_rows_per_block_(number_of_rows_per_block), number_of_cols_per_block_(number_of_cols_per_block) {} ;
   // Convert global index to coordinates of the block
-  constexpr T global2rowblock(const T global) const noexcept {return this->global2row(global)/3 ;} ;
-  constexpr T global2colblock(const T global) const noexcept {return this->global2col(global)/3 ;} ;
-  constexpr T global2block(const T global) const noexcept {return 3*global2rowblock(global)+global2colblock(global) ;} ;
+  constexpr T global2rowblock(const T global) const noexcept {return this->global2row(global)/number_of_rows_per_block_ ;} ;
+  constexpr T global2colblock(const T global) const noexcept {return this->global2col(global)/number_of_cols_per_block_ ;} ;
+  constexpr T global2block(const T global) const noexcept {return number_of_rows_per_block_*global2rowblock(global)+global2colblock(global) ;} ;
   // Function to loop over elements of a block of an element
   std::vector<T> elements_in_same_block_as(const T global) const noexcept 
   {
@@ -38,9 +38,9 @@ public:
   {
     std::vector<T> indices(this->elements_in_same_row_or_col_as(global)) ;
     const T first_element = first_element_in_block_of(global) ;
-    for (const T& row : left_over_indices(this->global2row(global)%3, number_of_rows_per_block_))
+    for (const T& row : left_over_indices(this->global2row(global)%number_of_rows_per_block_, number_of_rows_per_block_))
     {
-      for (const T& col : left_over_indices(this->global2col(global)%3, number_of_cols_per_block_))
+      for (const T& col : left_over_indices(this->global2col(global)%number_of_cols_per_block_, number_of_cols_per_block_))
       {
         indices.push_back(first_element + row*this->number_of_cols_ + col) ;
       }
